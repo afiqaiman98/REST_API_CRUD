@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $products = Product::all();
+        return response()->json(['products'=>$products],200);
+    }
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -16,7 +23,7 @@ class ProductController extends Controller
             'qty' => 'required|max:191',
 
         ]);
-        
+
         $product = new Product;
         $product->name = $request->name;
         $product->description = $request->description;
